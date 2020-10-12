@@ -1,5 +1,5 @@
 trigger:
-  '*'
+- '*'
   
   pool:
     vmImage: 'ubuntu-18.04'
@@ -12,12 +12,12 @@ trigger:
     dotnetSdkVersion: '3.1.300'
   
   steps:
-  task: UseDotNet@2
+  - task: UseDotNet@2
     displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
     inputs:
       version: '$(dotnetSdkVersion)'
   
-  task: Npm@1
+  - task: Npm@1
     displayName: 'Run npm install'
     inputs:
       verbose: false
@@ -32,13 +32,13 @@ trigger:
     displayName: 'Write build info'
     workingDirectory: $(wwwrootDir)
   
-  task: DotNetCoreCLI@2
+  - task: DotNetCoreCLI@2
     displayName: 'Restore project dependencies'
     inputs:
       command: 'restore'
       projects: '**/*.csproj'
   
-  task: DotNetCoreCLI@2
+  - task: DotNetCoreCLI@2
     displayName: 'Build the project - $(buildConfiguration)'
     inputs:
       command: 'build'
